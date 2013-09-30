@@ -5,9 +5,9 @@ import cv2
 video = cv2.VideoCapture("horse.avi")
 cv2.namedWindow("Test Video")
 while(True):
-    f, img = video.read()
-    if img != None:
+    success, img = video.read()
+    if success:
         cv2.imshow("Test Video", img)
-        cv2.waitKey(200) # Changes to this alter the frame rate.
+        cv2.waitKey(50) # Changes to this alter the frame rate.
     else:
         break
