@@ -2,7 +2,4 @@ import scipy
 import numpy
 import cv2
 
-print "Hello World"
-
-def printHelloWorld():
-    print "Hello World"
+video = cv2.VideoCapture("horse.avi")
