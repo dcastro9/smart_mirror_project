@@ -2,7 +2,7 @@ import scipy
 import numpy
 import cv2
 
-video = cv2.VideoCapture("horse.avi")
+video = cv2.VideoCapture("monstertruck.flv")
 cv2.namedWindow("Test Video")
 while(True):
     success, img = video.read()
