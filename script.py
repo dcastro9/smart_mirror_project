@@ -1,14 +1,4 @@
-import scipy
-import numpy
-import cv2
+from eulerian_video_magnification import EulerianVideoMagnification
 
-video = cv2.VideoCapture("sample.mp4")
-frames = []
-i = 0
-#reading in the video
-while(True):
-    success, img = video.read()
-    if success:
-        frames.append(img)
-    else:
-        break
+evm = EulerianVideoMagnification("sample.mp4")
+evm._frames # Has the frames in a numpy array.
