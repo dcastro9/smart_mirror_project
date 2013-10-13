@@ -28,5 +28,4 @@ class EulerianVideoMagnification(object):
                 self._frames.append(img)
             else:
                 break
-        print "Reading complete."
         self._frames = numpy.array(self._frames)
