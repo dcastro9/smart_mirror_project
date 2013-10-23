@@ -1,10 +1,13 @@
 import scipy
 
+from datetime import datetime
 from eulerian_video_magnification import EulerianVideoMagnification
 from laplacian_pyramid import LaplacianPyramid
 
-evm = EulerianVideoMagnification("sample.mp4")
-print "Done processing video."
-laplacian = LaplacianPyramid(evm._frames[0], 5)
-for level in range(len(laplacian._pyramid)):
-    scipy.misc.imsave('out' + str(level) + '.jpg', laplacian._pyramid[level])
+print datetime.now()
+evm = EulerianVideoMagnification("sample.mp4", 5)
+print datetime.now()
+
+for frame in range(len(evm._frames)):
+    current_frame = evm._frames[frame]
+    scipy.misc.imsave('out' + str(frame) + '.jpg', current_frame._pyramid[0])
