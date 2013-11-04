@@ -15,6 +15,7 @@ class LaplacianPyramid(object):
         self._pyramid = []
         reduction_pyramid = []
         expansion_pyramid = []
+        # TODO(dcastro): Currently picks the red channel (must update).
         frame = frame[:,:,0]
 
         reduction_pyramid.append(frame)
