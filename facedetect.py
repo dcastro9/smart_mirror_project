@@ -38,27 +38,30 @@ if __name__ == '__main__':
     cascade = cv2.CascadeClassifier(cascade_fn)
     nested = cv2.CascadeClassifier(nested_fn)
 
-    cam = create_capture(video_src, fallback='synth:bg=../cpp/lena.jpg:noise=0.05') #what to replace fallback with?
+    cam = create_capture(video_src)
 
     while True:
-        ret, img = cam.read()
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        gray = cv2.equalizeHist(gray)
+        success, img = cam.read()
+        if (success):
+            img = img[::8,::8].copy()
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            gray = cv2.equalizeHist(gray)
 
-        t = clock()
-        rects = detect(gray, cascade)
-        vis = img.copy()
-        draw_rects(vis, rects, (0, 255, 0))
-        for x1, y1, x2, y2 in rects:
-            roi = gray[y1:y2, x1:x2]
-            vis_roi = vis[y1:y2, x1:x2]
-            subrects = detect(roi.copy(), nested)
-            draw_rects(vis_roi, subrects, (255, 0, 0))
-        dt = clock() - t
+            t = clock()
+            rects = detect(gray, cascade)
+            vis = img.copy()
+            draw_rects(vis, rects, (0, 255, 0))
+            for x1, y1, x2, y2 in rects:
+                roi = gray[y1:y2, x1:x2]
+                vis_roi = vis[y1:y2, x1:x2]
+                subrects = detect(roi.copy(), nested)
+                draw_rects(vis_roi, subrects, (255, 0, 0))
+            dt = clock() - t
 
-        draw_str(vis, (20, 20), 'time: %.1f ms' % (dt*1000))
-        cv2.imshow('facedetect', vis)
-
+            draw_str(vis, (20, 20), 'time: %.1f ms' % (dt*1000))
+            cv2.imshow('facedetect', vis)
+        else:
+            break
         if 0xFF & cv2.waitKey(5) == 27:
             break
     cv2.destroyAllWindows()

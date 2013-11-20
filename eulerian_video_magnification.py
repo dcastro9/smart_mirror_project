@@ -24,7 +24,7 @@ class EulerianVideoMagnification(object):
         """
         self._video_path = video_path
         # Split into frames
-        self._frames = [] 
+        self._frames = []
         video = VideoCapture(video_path)
 
         # Obtain the Laplacian Pyramid
@@ -35,13 +35,14 @@ class EulerianVideoMagnification(object):
                 self._frames.append(LaplacianPyramid(img, levels)._pyramid)
             else:
                 break
+
         # Convert to a numpy array.
         self._frames = np.array(self._frames)
 
     def run(self):
         # Choose which pixels to run through the filter.
-
         # Viola-Jones face detector.
+        
 
     """The below helper functions implement a butterworth filter.
 
