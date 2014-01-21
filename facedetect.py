@@ -12,7 +12,7 @@ USAGE: facedetect.py [--cascade <cascade_fn>] [--nested-cascade <cascade_fn>] [<
 '''
 
 def detect(img, cascade):
-    rects = cascade.detectMultiScale(img, scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
+    rects = cascade.detectMultiScale(img, scaleFactor=1.1, minNeighbors=2, minSize=(10, 10), flags = cv2.CASCADE_SCALE_IMAGE)
     if len(rects) == 0:
         return []
     rects[:,2:] += rects[:,:2]
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     while True:
         success, img = cam.read()
         if (success):
-            img = img[::8,::8].copy()
+            img = img[::5,::5].copy()
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             gray = cv2.equalizeHist(gray)
 
