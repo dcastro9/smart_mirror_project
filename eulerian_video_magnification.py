@@ -8,6 +8,9 @@ from scipy.signal import lfilter
 class EulerianVideoMagnification(object):
     """Performs Eulerian Video Magnification.
 
+    TODO(dcastro): Modify to return a list of values given a list of
+    image frames.
+
     Example:
         evm = EulerianVideoMagnification("path/to/video/file")
         evm.run()
