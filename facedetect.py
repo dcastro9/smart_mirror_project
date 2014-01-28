@@ -10,7 +10,24 @@ from common import clock, draw_str
 help_message = '''
 USAGE: facedetect.py [--cascade <cascade_fn>] [--nested-cascade <cascade_fn>] [<video_source>]
 '''
-
+class Queue:
+    size = 0
+    def __init__(self):     # instantiates
+        self.in_stack = []
+        self.out_stack = []
+        size = 0
+    def push(self, obj):    # pushes object in
+        self.in_stack.append(obj)
+        size=self.size+1
+    def pop(self):          # dequeus
+        if self.size>0:
+            size = self.size-1
+        if not self.out_stack:
+            while self.in_stack:
+                self.out_stack.append(self.in_stack.pop())
+        return self.out_stack.pop()
+    def length(self):       # returns size
+        return self.size
 def detect(img, cascade):
     rects = cascade.detectMultiScale(img, scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
     if len(rects) == 0:
@@ -39,7 +56,7 @@ if __name__ == '__main__':
     nested = cv2.CascadeClassifier(nested_fn)
 
     cam = create_capture(video_src)
-
+    q = Queue()
     while True:
         success, img = cam.read()
         if (success):
@@ -60,6 +77,7 @@ if __name__ == '__main__':
 
             draw_str(vis, (20, 20), 'time: %.1f ms' % (dt*1000))
             cv2.imshow('facedetect', vis[y1:y2, x1:x2])
+            q.push(vis[y1:y2, x1:x2])
         else:
             break
         if 0xFF & cv2.waitKey(5) == 27:
