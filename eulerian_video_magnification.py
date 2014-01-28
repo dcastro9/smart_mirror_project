@@ -44,10 +44,10 @@ class EulerianVideoMagnification(object):
         # Viola-Jones face detector.
         
 
-    """The below helper functions implement a butterworth filter.
+        """The below helper functions implement a butterworth filter.
 
-    This code was taken directly from http://bit.ly/1d8nYPC
-    """
+        This code was taken directly from http://bit.ly/1d8nYPC
+        """
     def __butter_bandpass(self, lowcut, highcut, fs, order=2):
         nyq = 0.5 * fs
         low = lowcut / nyq

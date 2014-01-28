@@ -6,6 +6,7 @@ import cv2
 # local modules
 from video import create_capture
 from common import clock, draw_str
+from laplacian_pyramid import LaplacianPyramid
 
 help_message = '''
 USAGE: facedetect.py [--cascade <cascade_fn>] [--nested-cascade <cascade_fn>] [<video_source>]
@@ -57,6 +58,7 @@ if __name__ == '__main__':
 
     cam = create_capture(video_src)
     q = Queue()
+    frames = []
     while True:
         success, img = cam.read()
         if (success):
@@ -78,6 +80,12 @@ if __name__ == '__main__':
             draw_str(vis, (20, 20), 'time: %.1f ms' % (dt*1000))
             cv2.imshow('facedetect', vis[y1:y2, x1:x2])
             q.push(vis[y1:y2, x1:x2])
+            #if q.size >10:
+             #   q.pop()
+             #   img = img[::3,::3]
+             #   frames.append(LaplacianPyramid(img, 2)._pyramid)
+            #else:
+             #   break
         else:
             break
         if 0xFF & cv2.waitKey(5) == 27:
