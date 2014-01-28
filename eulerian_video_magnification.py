@@ -16,35 +16,31 @@ class EulerianVideoMagnification(object):
         evm.run()
     
     Attributes:
-       video_path: The location of the video you wish to process.
+       frames: The frames of the video.
        levels: The number of levels you want to compute in the pyramid.
        step: The amount you want the original video to be reduced in size prior
              to computation. Set step=1 if you want to use the original size.
     """
 
-    def __init__(self, video_path, levels=2, step=3):
+    def __init__(self, frames, levels=2, step=3):
         """Initializes the video magnification process by obtaining the frames.
         """
-        self._video_path = video_path
         # Split into frames
-        self._frames = []
-        video = VideoCapture(video_path)
+        self._frames = frames
 
-        # Obtain the Laplacian Pyramid
-        while True:
-            success, img = video.read()
-            if success:
-                img = img[::step,::step]
-                self._frames.append(LaplacianPyramid(img, levels)._pyramid)
-            else:
-                break
+        # Obtain the Laplacian Pyramid on each frame.
+        for val in range(len(frames)):
+            img = frames[val]
+            img = img[::step,::step]
+            self._frames.append(LaplacianPyramid(img, levels)._pyramid)
 
         # Convert to a numpy array.
         self._frames = np.array(self._frames)
 
     def run(self):
-        # Choose which pixels to run through the filter.
-        # Viola-Jones face detector.
+        # Index into the frames
+        print self._frames
+        #return __butter_bandpass_filter(, 0.83, 1.0, 30)
         
 
     """The below helper functions implement a butterworth filter.
