@@ -59,7 +59,7 @@ if __name__ == '__main__':
             dt = clock() - t
 
             draw_str(vis, (20, 20), 'time: %.1f ms' % (dt*1000))
-            cv2.imshow('facedetect', vis)
+            cv2.imshow('facedetect', vis[y1:y2, x1:x2])
         else:
             break
         if 0xFF & cv2.waitKey(5) == 27:
