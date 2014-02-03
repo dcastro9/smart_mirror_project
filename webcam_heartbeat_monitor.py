@@ -11,12 +11,18 @@ class Queue(object):
     def __init__(self):
         self.in_stack = []
         self.out_stack = []
+	self.size = 0
 
     def push(self, obj):
         self.in_stack.append(obj)
+	self.size += 1;
 
     def pop(self):
-        # TODO: Figure out what happens when pop is empty.
+        # TODO: Figure out what happens when pop is empty. -- returns nothing 
+	if self.size == 0:
+		return
+	else:
+		self.size -= 1
         if not self.out_stack:
             while self.in_stack:
                 self.out_stack.append(self.in_stack.pop())
@@ -118,7 +124,7 @@ class FaceDetector(object):
            A cropped image of the face.
         """
         # TODO(vjain): Think about alternate ways of getting the face
-        # (consistent).
+        # (consistent). extrapolation using the PIL library? focusing on certan part of image
 	# suppose dim = l, w (length, width)
 
         rects = self.__detect(img)
