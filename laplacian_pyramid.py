@@ -56,7 +56,7 @@ class LaplacianPyramid(object):
 
             # Append Laplacian Pyramid for the current channel.
 
-            self._pyramid.append(current_pyrami)d
+            self._pyramid.append(current_pyramid)
 
     def generating_kernel(self, a):
         '''Returns a 5x5 generating kernel based on parameter a.

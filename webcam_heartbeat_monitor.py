@@ -1,5 +1,5 @@
 import numpy as np
-
+import Image
 from cv2 import VideoCapture
 from eulerian_video_magnification import EulerianVideoMagnification
 from scipy.signal import butter
@@ -111,7 +111,7 @@ class FaceDetector(object):
         rects[:,2:] += rects[:,:2]
         return rects
 
-    def process(img):
+    def process(img, l, w):
         """Processes any given image and returns the first face it finds.
 
         Returns:
@@ -119,7 +119,12 @@ class FaceDetector(object):
         """
         # TODO(vjain): Think about alternate ways of getting the face
         # (consistent).
+	# suppose dim = l, w (length, width)
+
         rects = self.__detect(img)
         for x1, y1, x2, y2 in rects:
             # TODO(vjain): Resize the imge to dimension.
-            return img[y1:y2, x1:x2]
+		im1 = Image.open(img)
+		new_im = im1.resize((w, l), Image.BILINEAR)
+		#return new_im
+           	return img[y1:y2, x1:x2]
