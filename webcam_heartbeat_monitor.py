@@ -126,5 +126,8 @@ class FaceDetector(object):
             # TODO(vjain): Resize the imge to dimension.
 		im1 = Image.open(img)
 		new_im = im1.resize((w, l), Image.BILINEAR)
+		"""my solution
+		img = img[y1:y2:int(round((y2-y1)/(l))), x1:x2:int(round((y2-y1)/(w)))]	
+		"""
 		#return new_im
            	return img[y1:y2, x1:x2]
