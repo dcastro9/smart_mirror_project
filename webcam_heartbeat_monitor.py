@@ -1,6 +1,10 @@
+# Copyright 2014, All Rights Reserved
+# Author: Vikram Jain <vjain40@gatech.edu>
+# Author: Daniel Castro <dcastro9@gatech.edu>
+
 import numpy as np
 import Image
-from cv2 import VideoCapture
+import cv2
 from eulerian_video_magnification import EulerianVideoMagnification
 from scipy.signal import butter
 from scipy.signal import lfilter
@@ -8,21 +12,22 @@ from scipy.signal import lfilter
 class Queue(object):
     """Implementation of a queue.
     """
+
     def __init__(self):
         self.in_stack = []
         self.out_stack = []
-	self.size = 0
+        self._size = 0
 
     def push(self, obj):
         self.in_stack.append(obj)
-	self.size += 1;
+        self._size += 1
 
     def pop(self):
         # TODO: Figure out what happens when pop is empty. -- returns nothing 
-	if self.size == 0:
+	if self._size == 0:
 		return
 	else:
-		self.size -= 1
+		self._size -= 1
         if not self.out_stack:
             while self.in_stack:
                 self.out_stack.append(self.in_stack.pop())
@@ -47,26 +52,25 @@ class WebcamHeartbeatMonitor(object):
         self._img_queue = Queue()
         self._hb_queue = Queue()
         self._face_detector = FaceDetector((50,50))
-        self._eulerian_video_magnification = EulerianVideoMagnification()
         self._num_frames = num_frames 
 
         if self._video_capture.isOpened():
-            rval, frame = vc.read()
+            self._rval, frame = self._video_capture.read()
         else:
-            rval = False
+            self._rval = False
 
     def run(self):
-        while rval:
-            rval, frame = vc.read()
+        while self._rval:
+            self._rval, frame = self._video_capture.read()
             # Run the face detector on the frame.
             face_image = self._face_detector.process(frame)
 
             self._img_queue.push(face_image)
             if self._img_queue.length() > self._num_frames:
                 self._img_queue.pop()
-                # TODO(dcastro): Rewrite EVM to process frames.
-                frames = self._eulerian_video_magnification.process(
-                        self._img_queue.current_queue(self._num_frames))
+                evm = EulerianVideoMagnification(
+                    self._img_queue.current_queue(self._num_frames))
+                frames = evm.process()
                 if self._hb_queue.length() == 0:
                     for frame in frames:
                         self._hb_queue.push(frame)
@@ -101,6 +105,7 @@ class FaceDetector(object):
                  nested_fn="cascades/haarcascade_eye.xml"):
         """Creates a class to detect faces in an image.
         """
+        self._dimension = dimension
         self._cascade = cv2.CascadeClassifier(cascade_fn)
         self._nested = cv2.CascadeClassifier(nested_fn)
 
@@ -117,7 +122,7 @@ class FaceDetector(object):
         rects[:,2:] += rects[:,:2]
         return rects
 
-    def process(img, l, w):
+    def process(self, img):
         """Processes any given image and returns the first face it finds.
 
         Returns:
@@ -125,15 +130,16 @@ class FaceDetector(object):
         """
         # TODO(vjain): Think about alternate ways of getting the face
         # (consistent). extrapolation using the PIL library? focusing on certan part of image
-	# suppose dim = l, w (length, width)
+	    # suppose dim = l, w (length, width)
 
         rects = self.__detect(img)
         for x1, y1, x2, y2 in rects:
-            # TODO(vjain): Resize the imge to dimension.
-		im1 = Image.open(img)
-		new_im = im1.resize((w, l), Image.BILINEAR)
-		"""my solution
-		img = img[y1:y2:int(round((y2-y1)/(l))), x1:x2:int(round((y2-y1)/(w)))]	
-		"""
+        # TODO(vjain): Resize the image to dimension.
+		#im1 = Image.open(img)
+		#new_im = im1.resize((w, l), Image.BILINEAR)
+		#my solution
+		img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
+                  x1:x2:int(round((x2-x1)/(self._dimension[1])))]	
+
 		#return new_im
            	return img[y1:y2, x1:x2]

@@ -63,3 +63,9 @@ class LaplacianPyramid(object):
         '''
         w_1d = np.array([0.25 - a/2.0, 0.25, a, 0.25, 0.25 - a/2.0])
         return np.outer(w_1d, w_1d)
+
+    @property
+    def pyramid(self):
+        """Return the Laplacian Pyramid.
+        """
+        return self._pyramid
