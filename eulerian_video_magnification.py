@@ -22,7 +22,7 @@ class EulerianVideoMagnification(object):
              to computation. Set step=1 if you want to use the original size.
     """
 
-    def __init__(self, frames, levels=3, step=3, alpha=100):
+    def __init__(self, frames, levels=3, step=3, alpha=40):
         """Initializes the video magnification process by obtaining the frames.
         """
         # Split into frames
@@ -64,7 +64,7 @@ class EulerianVideoMagnification(object):
         # Average the butterworth filter.
         evm_array /= (len(self._pyramids)*self._levels)
         for val in range(len(evm_array)):
-            self._frames[val] += evm_array[val]*self._alpha
+            self._frames[val][:,:,2] += evm_array[val]*self._alpha
 
         return self._frames
         

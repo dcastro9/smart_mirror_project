@@ -132,14 +132,10 @@ class FaceDetector(object):
         # (consistent). extrapolation using the PIL library? focusing on certan part of image
 	    # suppose dim = l, w (length, width)
 
-        rects = self.__detect(img)
-        for x1, y1, x2, y2 in rects:
-        # TODO(vjain): Resize the image to dimension.
-		#im1 = Image.open(img)
-		#new_im = im1.resize((w, l), Image.BILINEAR)
-		#my solution
-		img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
-                  x1:x2:int(round((x2-x1)/(self._dimension[1])))]	
+        #rects = self.__detect(img)
+        #for x1, y1, x2, y2 in rects:
+    	#	img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
+        #              x1:x2:int(round((x2-x1)/(self._dimension[1])))]
 
 		#return new_im
-           	return img[y1:y2, x1:x2]
+        return img
