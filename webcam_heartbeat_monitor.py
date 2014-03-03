@@ -58,13 +58,29 @@ class WebcamHeartbeatMonitor(object):
             self._rval, frame = self._video_capture.read()
         else:
             self._rval = False
-
+    def debug(self): #for debugging purposes
+	frames = []
+	tmp = cv2.namedWindow("asd")
+	for val in range(180):
+		success, img = self._video_capture.read()
+		face_image = self._face_detector.process(img)
+		cv2.imshow("asd", img)
+		if success:
+			frames.append(face_image[::2,::2])
+		else:
+			break
+	#tmp.destory
+	evm = EulerianVideoMagnification(frames, levels=3)
+	result = evm.process()
+	win = cv2.namedWindow("Image Capture")
+	for frame in result:
+		cv2.imshow("Image Capture", frame)
+		cv2.waitKey(20)
     def run(self):
         while self._rval:
             self._rval, frame = self._video_capture.read()
             # Run the face detector on the frame.
             face_image = self._face_detector.process(frame)
-
             self._img_queue.push(face_image)
             if self._img_queue.length() > self._num_frames:
                 self._img_queue.pop()
@@ -132,10 +148,10 @@ class FaceDetector(object):
         # (consistent). extrapolation using the PIL library? focusing on certan part of image
 	    # suppose dim = l, w (length, width)
 
-        #rects = self.__detect(img)
-        #for x1, y1, x2, y2 in rects:
-    	#	img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
-        #              x1:x2:int(round((x2-x1)/(self._dimension[1])))]
+        rects = self.__detect(img)
+        for x1, y1, x2, y2 in rects:
+    		img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
+                      x1:x2:int(round((x2-x1)/(self._dimension[1])))]
 
 		#return new_im
         return img

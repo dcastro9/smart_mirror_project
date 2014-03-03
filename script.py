@@ -16,10 +16,10 @@ for val in range(180):
 	else:
 		break
 
-#evm = EulerianVideoMagnification(frames, levels=3)
-#result = evm.process()
-whm = WebcamHeartbeatMonitor(30*10)
-whm.run()
+evm = EulerianVideoMagnification(frames, levels=3)
+result = evm.process()
+#whm = WebcamHeartbeatMonitor(30*10)
+#whm.run()
 win = cv2.namedWindow("Image Capture")
 
 for frame in result:
