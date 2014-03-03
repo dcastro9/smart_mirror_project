@@ -81,22 +81,22 @@ class WebcamHeartbeatMonitor(object):
             self._rval, frame = self._video_capture.read()
             # Run the face detector on the frame.
             face_image = self._face_detector.process(frame)
+	    cv2.imshow("Image Capture", face_image)
+	    cv2.waitKey(20)
             self._img_queue.push(face_image)
-            if self._img_queue.length() > 180:
+            if self._img_queue.length() > self._num_frames:
                 self._img_queue.pop()
                 evm = EulerianVideoMagnification(
-                    self._img_queue.current_queue(180), levels=3)
+                    self._img_queue.current_queue(self._num_frames), levels=3)
                 frames = evm.process()
                 if self._hb_queue.length() == 0:
                     for frame in frames:
                         self._hb_queue.push(frame)
                 else:
-                    self._hb_queue.push(frames[frames.length - 1])
-
-            cv2.imshow("Image Capture", frame)
-
+                    self._hb_queue.push(frames[len(frames) - 1])
             if self._hb_queue.length() > 0:
                 cv2.imshow("Heartbeat", self._hb_queue.pop())
+		print("asd")
 
             key = cv2.waitKey(20)
             if key == 27: # Escape key.
@@ -174,9 +174,10 @@ class FaceDetector(object):
 	    # suppose dim = l, w (length, width)
 
         rects = self.__detect(img)
-        for x1, y1, x2, y2 in rects:
-    		img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
-                      x1:x2:int(round((x2-x1)/(self._dimension[1])))]
-
+	for x1, y1, x2, y2 in rects:
+		if ((round((y2-y1)/(self._dimension[0])))>0 and int(round((x2-x1)/(self._dimension[1])))>0):
+	  		img = img[y1:y2:int(round((y2-y1)/(self._dimension[0]))),
+				x1:x2:int(round((x2-x1)/(self._dimension[1])))]
+	
 		#return new_im
         return img

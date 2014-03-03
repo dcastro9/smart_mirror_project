@@ -4,6 +4,6 @@ import numpy as np
 import cv2
 	
 whm = WebcamHeartbeatMonitor(30*10)
-whm.debug()
+whm.run2()
 #win = cv2.namedWindow("Image Capture")
 #cv2.waitKey(10000)
