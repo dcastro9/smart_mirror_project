@@ -60,15 +60,15 @@ class WebcamHeartbeatMonitor(object):
             self._rval = False
     def debug(self): #for debugging purposes
 	frames = []
-	tmp = cv2.namedWindow("asd")
 	for val in range(180):
 		success, img = self._video_capture.read()
 		face_image = self._face_detector.process(img)
-		cv2.imshow("asd", img)
+		cv2.imshow("asd", face_image)
 		if success:
 			frames.append(face_image[::2,::2])
 		else:
 			break
+		cv2.waitKey(20)
 	#tmp.destory
 	evm = EulerianVideoMagnification(frames, levels=3)
 	result = evm.process()
@@ -76,6 +76,31 @@ class WebcamHeartbeatMonitor(object):
 	for frame in result:
 		cv2.imshow("Image Capture", frame)
 		cv2.waitKey(20)
+    def run2(self):		# to debug
+	 while self._rval:
+            self._rval, frame = self._video_capture.read()
+            # Run the face detector on the frame.
+            face_image = self._face_detector.process(frame)
+            self._img_queue.push(face_image)
+            if self._img_queue.length() > 180:
+                self._img_queue.pop()
+                evm = EulerianVideoMagnification(
+                    self._img_queue.current_queue(180), levels=3)
+                frames = evm.process()
+                if self._hb_queue.length() == 0:
+                    for frame in frames:
+                        self._hb_queue.push(frame)
+                else:
+                    self._hb_queue.push(frames[frames.length - 1])
+
+            cv2.imshow("Image Capture", frame)
+
+            if self._hb_queue.length() > 0:
+                cv2.imshow("Heartbeat", self._hb_queue.pop())
+
+            key = cv2.waitKey(20)
+            if key == 27: # Escape key.
+                break
     def run(self):
         while self._rval:
             self._rval, frame = self._video_capture.read()
