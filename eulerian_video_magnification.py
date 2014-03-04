@@ -22,7 +22,7 @@ class EulerianVideoMagnification(object):
              to computation. Set step=1 if you want to use the original size.
     """
 
-    def __init__(self, frames, levels=3, step=3, alpha=40):
+    def __init__(self, frames, levels=1, step=1, alpha=40):
         """Initializes the video magnification process by obtaining the frames.
         """
         # Split into frames
