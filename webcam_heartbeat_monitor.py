@@ -51,7 +51,7 @@ class WebcamHeartbeatMonitor(object):
     def __init__(self, num_frames):
         """Sets up the video magnification and webcam feed.
         """
-        self._video_capture = cv2.VideoCapture(1)
+        self._video_capture = cv2.VideoCapture(0)
         self._window = cv2.namedWindow("Image Capture")
         self._hb_monitor = cv2.namedWindow("Heartbeat")
         self._img_queue = Queue()
