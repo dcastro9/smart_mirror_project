@@ -29,10 +29,12 @@ namespace Test
         }
 
         //Displays the date and time in labels
-        private void displayTimeDate()
+        private async Task displayTimeDate()
         {
-            datelabel.Text = DateTime.Now.ToLongDateString();
-            timelabel.Text = DateTime.Now.ToShortTimeString();
+            //datelabel.Text = DateTime.Now.ToLongDateString();
+            timelabel.Text = DateTime.Now.ToLongTimeString();
+            await Task.Delay(1000);
+            displayTimeDate();
         }
 
         //Accesses Yahoo Weather to load the Temperature and Condition

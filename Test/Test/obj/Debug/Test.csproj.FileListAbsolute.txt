@@ -7,3 +7,12 @@ c:\users\sam\documents\visual studio 2013\Projects\Test\Test\obj\Debug\Test.Prop
 c:\users\sam\documents\visual studio 2013\Projects\Test\Test\obj\Debug\Test.csproj.GenerateResource.Cache
 c:\users\sam\documents\visual studio 2013\Projects\Test\Test\obj\Debug\Test.exe
 c:\users\sam\documents\visual studio 2013\Projects\Test\Test\obj\Debug\Test.pdb
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\bin\Debug\Test.exe.config
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\bin\Debug\Test.exe
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\bin\Debug\Test.pdb
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.Form1.resources
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.Properties.Resources.resources
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.csproj.GenerateResource.Cache
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.exe
+C:\Users\qk\Downloads\smart_mirror_project-smart_mirror_branch\smart_mirror_project-smart_mirror_branch\Test\Test\obj\Debug\Test.pdb
