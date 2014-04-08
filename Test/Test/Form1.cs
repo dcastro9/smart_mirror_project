@@ -20,6 +20,8 @@ namespace Test
         //Variables for Weather
         String Temperature;
         String Condition;
+        String City;
+        String State;
 
         public Form1()
         {
@@ -29,8 +31,8 @@ namespace Test
         //Displays the date and time in labels
         private void displayTimeDate()
         {
-            label1.Text = DateTime.Now.ToLongDateString();
-            label2.Text = DateTime.Now.ToShortTimeString();
+            datelabel.Text = DateTime.Now.ToLongDateString();
+            timelabel.Text = DateTime.Now.ToShortTimeString();
         }
 
         //Accesses Yahoo Weather to load the Temperature and Condition
@@ -48,16 +50,12 @@ namespace Test
 
             Temperature = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["temp"].Value;
             Condition = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["text"].Value;
+            City = channel.SelectSingleNode("yweather:location", manager).Attributes["city"].Value;
+            State = channel.SelectSingleNode("yweather:location", manager).Attributes["region"].Value;
 
-            label3.Text = Temperature+"°F";
-            label4.Text = Condition;
-        }
-
-
-        //I wasn't sure how to get functions to run on startup, so I simply have a 'Start' button
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
+            templabel.Text = Temperature+"°F";
+            conditionlabel.Text = Condition;
+            locationlabel.Text = City+", "+State;
         }
 
         private void Form1_Load(object sender, EventArgs e)

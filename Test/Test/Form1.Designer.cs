@@ -28,62 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.datelabel = new System.Windows.Forms.Label();
+            this.timelabel = new System.Windows.Forms.Label();
+            this.templabel = new System.Windows.Forms.Label();
+            this.conditionlabel = new System.Windows.Forms.Label();
+            this.locationlabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // datelabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 14);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "date";
+            this.datelabel.AutoSize = true;
+            this.datelabel.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.datelabel.Location = new System.Drawing.Point(12, 9);
+            this.datelabel.Name = "datelabel";
+            this.datelabel.Size = new System.Drawing.Size(32, 14);
+            this.datelabel.TabIndex = 1;
+            this.datelabel.Text = "date";
             // 
-            // button1
+            // timelabel
             // 
-            this.button1.Location = new System.Drawing.Point(12, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.timelabel.AutoSize = true;
+            this.timelabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timelabel.Location = new System.Drawing.Point(12, 23);
+            this.timelabel.Name = "timelabel";
+            this.timelabel.Size = new System.Drawing.Size(40, 18);
+            this.timelabel.TabIndex = 3;
+            this.timelabel.Text = "time";
             // 
-            // label2
+            // templabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 18);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "time";
+            this.templabel.AutoSize = true;
+            this.templabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.templabel.Location = new System.Drawing.Point(19, 69);
+            this.templabel.Name = "templabel";
+            this.templabel.Size = new System.Drawing.Size(45, 18);
+            this.templabel.TabIndex = 4;
+            this.templabel.Text = "temp";
             // 
-            // label3
+            // conditionlabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 52);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 18);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "temp";
+            this.conditionlabel.AutoSize = true;
+            this.conditionlabel.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.conditionlabel.Location = new System.Drawing.Point(12, 87);
+            this.conditionlabel.Name = "conditionlabel";
+            this.conditionlabel.Size = new System.Drawing.Size(61, 14);
+            this.conditionlabel.TabIndex = 5;
+            this.conditionlabel.Text = "condition";
             // 
-            // label4
+            // locationlabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 14);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "condition";
+            this.locationlabel.AutoSize = true;
+            this.locationlabel.Font = new System.Drawing.Font("Georgia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationlabel.Location = new System.Drawing.Point(12, 58);
+            this.locationlabel.Name = "locationlabel";
+            this.locationlabel.Size = new System.Drawing.Size(53, 14);
+            this.locationlabel.TabIndex = 6;
+            this.locationlabel.Text = "location";
             // 
             // Form1
             // 
@@ -91,11 +91,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(436, 160);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.locationlabel);
+            this.Controls.Add(this.conditionlabel);
+            this.Controls.Add(this.templabel);
+            this.Controls.Add(this.timelabel);
+            this.Controls.Add(this.datelabel);
             this.Name = "Form1";
             this.Text = "Mirror Interface";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -106,11 +106,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label datelabel;
+        private System.Windows.Forms.Label timelabel;
+        private System.Windows.Forms.Label templabel;
+        private System.Windows.Forms.Label conditionlabel;
+        private System.Windows.Forms.Label locationlabel;
 
 
 
